@@ -2,6 +2,8 @@ module Api::V1
   class TasksController < ApiController
 
     before_action :set_task, only: [:show, :update, :destroy]
+    before_action :authenticate_user
+
 
     def index
       @tasks = Task.all
@@ -36,7 +38,6 @@ module Api::V1
       @task.destroy
     end
 
-
     private
 
     def set_task
@@ -44,7 +45,7 @@ module Api::V1
     end
 
     def task_params
-      params.require(:task).permit(:name, :priority, :due_date)
+      params.require(:task).permit(:name, :priority, :due_date, :user_id)
     end
   end
 end
