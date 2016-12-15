@@ -6,7 +6,7 @@ module Api::V1
 
 
     def index
-      @tasks = Task.all
+      @tasks = Task.where(user: current_user)
 
       render json: @tasks
     end
